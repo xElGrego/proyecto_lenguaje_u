@@ -10,10 +10,8 @@ class ContentPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Contenido"),
         ),
-        body: const SingleChildScrollView(
-          child: Center(
+        body: const  Center(
             child: Text("Contenido"),
-          ),
         ),
       ),
     );

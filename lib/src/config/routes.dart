@@ -18,7 +18,7 @@ const String contentPage  = 'content';
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
     case loginPage:
-      return MaterialPageRoute(builder: (context) => const LoginPage());
+      return MaterialPageRoute(builder: (context) =>  LoginPage());
     case homePage:
       return MaterialPageRoute(builder: (context) => const HomePage());
     case taskPage:

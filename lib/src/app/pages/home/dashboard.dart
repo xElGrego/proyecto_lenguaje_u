@@ -26,6 +26,7 @@ class GridDashboard extends StatelessWidget {
     var color = 0xFF8e96e1;
     return Flexible(
       child: GridView.count(
+         physics: const BouncingScrollPhysics(),
         childAspectRatio: 1.0,
         padding: const EdgeInsets.only(left: 16, right: 16),
         crossAxisCount: 2,
@@ -65,7 +66,7 @@ class GridDashboard extends StatelessWidget {
                     data.subtitle,
                     style: GoogleFonts.openSans(
                       textStyle: const TextStyle(
-                        color: Colors.white38,
+                        color: Colors.white60,
                         fontSize: 10,
                         fontWeight: FontWeight.w600,
                       ),

@@ -23,20 +23,25 @@ class TaskPage extends StatelessWidget {
             children: const [
               TaskWidget(
                 note: 10,
-                title: 'Tarea 1',
+                title: 'Actividad 1',
                 color: Color.fromARGB(255, 19, 133, 42),
+                fecha: '03/02/2021',
               ),
               SizedBox(height: 15,),
               TaskWidget(
                 note: 6,
-                title: 'Tarea 2',
+                title: 'Actividad 2',
                 color: Color(0xffFFA800),
+                fecha: '01/02/2020',
+
               ),
               SizedBox(height: 15,),
               TaskWidget(
                 note: 3,
-                title: 'Tarea 3',
+                title: 'Actividad 3',
                 color: Colors.red,
+                fecha: '05/02/2021',
+
               ),
             ],
           ),

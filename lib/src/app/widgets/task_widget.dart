@@ -7,8 +7,10 @@ class TaskWidget extends StatelessWidget {
   final int note;
   final String title;
   final Color color;
+  final String fecha;
 
-  const TaskWidget({Key? key, required this.note, required this.title, required this.color})
+  const TaskWidget(
+      {Key? key, required this.note, required this.title, required this.color, required this.fecha})
       : super(key: key);
 
   @override
@@ -35,30 +37,25 @@ class TaskWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Center(
-                  child: Text(
-                    note.toString(),
-                    style: GoogleFonts.openSans(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                child: const Center(
+                  child: Icon(
+                    Icons.picture_as_pdf,
+                    size: 40,
+                    color: Colors.white,
                   ),
                 ),
               ),
               IconButton(
                 icon: const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20),
-               onPressed: () {
-                    log("Navegando");
+                onPressed: () {
+                  log("Navegando");
                 },
               )
             ],
           ),
           const SizedBox(height: 15),
           Text(
-            title,
+            'Puntaje: $note',
             style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -68,19 +65,19 @@ class TaskWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                '48/64 Gb',
-                style: TextStyle(
+              Text(
+                title,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                 ),
               ),
               Text(
-                'Fecha: 07/2021',
+                'fecha: $fecha',
                 style: GoogleFonts.openSans(
                   textStyle: const TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -94,10 +91,14 @@ class TaskWidget extends StatelessWidget {
                 height: 6.0,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: (note >3 && note <=6 ? Colors.amber[400] : note >= 7  ? Colors.green : Colors.red),
+                  color: (note > 3 && note <= 6
+                      ? Colors.amber[400]
+                      : note >= 7
+                          ? Colors.green
+                          : Colors.red),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-              )
+              ),
             ],
           ),
         ],

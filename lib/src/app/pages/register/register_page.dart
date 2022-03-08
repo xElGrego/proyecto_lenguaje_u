@@ -25,7 +25,10 @@ class RegisterPage extends StatelessWidget {
                   child: const Text(
                     "Registro",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Color(0xFF2661FA), fontSize: 36),
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2661FA),
+                      fontSize: 36,
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -84,9 +87,7 @@ class RegisterPage extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: RaisedButton(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0),
                   ),
@@ -119,12 +120,15 @@ class RegisterPage extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: GestureDetector(
                   onTap: () => {
-                    Navigator.pushNamed(context,'login')
+                    Navigator.pushNamed(context, 'login'),
                   },
                   child: const Text(
                     "¿Ya tienes una cuenta?",
                     style: TextStyle(
-                        fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF2661FA)),
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2661FA),
+                    ),
                   ),
                 ),
               )

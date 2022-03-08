@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-         onGenerateRoute: route.controller,
+        onGenerateRoute: route.controller,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SafeArea(
+        home:  SafeArea(
           child: LoginPage(),
         ),
       ),

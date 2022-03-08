@@ -37,6 +37,8 @@ dependencies:
   provider: 
   http: 
   google_fonts: ^2.3.1
+  shared_preferences: 
+  another_flushbar:
 
 dev_dependencies:
   flutter_test:
