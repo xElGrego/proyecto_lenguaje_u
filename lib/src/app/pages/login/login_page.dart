@@ -1,14 +1,16 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_lenguaje_u/src/app/pages/home/home_page.dart';
 
+import '../../../data/model/user.dart';
+import '../../../data/provider/auth_provider.dart';
+import '../../../data/provider/user_provider.dart';
 import '../../widgets/background.dart';
 import '../register/register_page.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
-
-  
   String username = '', password = '';
   final _formKey = GlobalKey<FormState>();
 
@@ -16,23 +18,31 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<AuthProvider>(context);
 
     void doLogin() {
-    final form = _formKey.currentState;
+      final form = _formKey.currentState;
 
-    if (form!.validate()) {
-      form.save();
-      Navigator.pushReplacementNamed(context, 'home');
-    }
-    else{
-       Flushbar(
-        title: "Error",
-        message: "Debes ingresar correo y contraseña",
-        duration: const Duration(seconds: 2),
-      ).show(context);
-    }
-  }
+      if (form!.validate()) {
+        form.save();
 
+        final Future<Map<String, dynamic>> respose = controller.login(username, password);
+
+        respose.then((response) {
+          if (response["status"]) {
+            User user = response['user'];
+            Provider.of<UserProvider>(context, listen: false).setUser(user);
+            Navigator.pushReplacementNamed(context, 'home');
+          } else {
+            Flushbar(
+              title: "Error",
+              message: "Error",
+              duration: const Duration(seconds: 2),
+            ).show(context);
+          }
+        });
+      }
+    }
 
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -50,7 +60,10 @@ class LoginPage extends StatelessWidget {
                     child: const Text(
                       "Bienvenido",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Color(0xFF2661FA), fontSize: 36),
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2661FA),
+                        fontSize: 36,
+                      ),
                       textAlign: TextAlign.left,
                     ),
                   ),
@@ -61,7 +74,7 @@ class LoginPage extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: TextFormField(
                     decoration: const InputDecoration(labelText: "Correo"),
-                     autofocus: false,
+                    autofocus: false,
                     onSaved: (value) => username = value as String,
                     validator: (value) => value!.isEmpty ? "Ingresa tu correo" : null,
                   ),
@@ -73,6 +86,7 @@ class LoginPage extends StatelessWidget {
                   child: TextFormField(
                     decoration: const InputDecoration(labelText: "Contraseña"),
                     obscureText: true,
+                    onSaved: (value) => password = value as String,
                     validator: (value) => value!.isEmpty ? "La contraseña es obligatoria" : null,
                   ),
                 ),
@@ -124,12 +138,7 @@ class LoginPage extends StatelessWidget {
                     vertical: 10,
                   ),
                   child: GestureDetector(
-                    onTap: () => {
-                      Navigator.pushNamed(
-                        context,
-                        'register'
-                      ),
-                    },
+                    onTap: () => {doLogin},
                     child: const Text(
                       "¿No tienes una cuenta? Créala",
                       style: TextStyle(

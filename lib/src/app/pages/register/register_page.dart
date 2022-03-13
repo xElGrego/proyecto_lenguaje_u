@@ -119,9 +119,7 @@ class RegisterPage extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: GestureDetector(
-                  onTap: () => {
-                    Navigator.pushNamed(context, 'login'),
-                  },
+                  onTap: () => {Navigator.pushNamed(context, 'login')},
                   child: const Text(
                     "¿Ya tienes una cuenta?",
                     style: TextStyle(
