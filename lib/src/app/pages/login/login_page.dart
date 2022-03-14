@@ -1,13 +1,11 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_lenguaje_u/src/app/pages/home/home_page.dart';
 
 import '../../../data/model/user.dart';
 import '../../../data/provider/auth_provider.dart';
 import '../../../data/provider/user_provider.dart';
 import '../../widgets/background.dart';
-import '../register/register_page.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatelessWidget {

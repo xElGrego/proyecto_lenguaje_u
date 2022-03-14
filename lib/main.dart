@@ -7,6 +7,7 @@ import 'package:proyecto_lenguaje_u/src/app/pages/login/login_page.dart';
 import 'package:proyecto_lenguaje_u/src/config/shared_preferences.dart';
 import 'package:proyecto_lenguaje_u/src/data/model/user.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/auth_provider.dart';
+import 'package:proyecto_lenguaje_u/src/data/provider/botton_navigation_provider.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/register_controller.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/user_provider.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => RegisterController()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+         ChangeNotifierProvider(create: (_) => BottonNavigationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -55,6 +57,7 @@ class MyApp extends StatelessWidget {
                     return LoginPage();
                   } else {
                     log("DashBoard");
+                    Provider.of<UserProvider>(context).setUser(snapshot.data!);
                     return const HomePage();
                   }
               }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_lenguaje_u/src/app/pages/login/login_page.dart';
 import '../../../data/provider/register_controller.dart';
 import '../../widgets/background.dart';
 
@@ -129,7 +128,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
