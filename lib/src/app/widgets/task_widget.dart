@@ -45,12 +45,7 @@ class TaskWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20),
-                onPressed: () {
-                  log("Navegando");
-                },
-              )
+             
             ],
           ),
           const SizedBox(height: 15),

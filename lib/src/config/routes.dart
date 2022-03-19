@@ -6,19 +6,23 @@ import 'package:proyecto_lenguaje_u/src/app/pages/profile/profile_page.dart';
 import 'package:proyecto_lenguaje_u/src/app/pages/register/register_page.dart';
 import 'package:proyecto_lenguaje_u/src/app/pages/task/taks_page.dart';
 
+import '../app/pages/content/videos/videos_page.dart';
 import '../app/pages/home/home_page.dart';
 import '../app/pages/login/login_page.dart';
+import '../app/pages/task_general/tas_general_page.dart';
 
 
 // Route Names
 const String loginPage    = 'login';
 const String homePage     = 'home';
 const String taskPage     = 'task';
+const String taskGeneralPage = 'taskGeneral';
 const String registerPage = 'register';
 const String contentPage  = 'content';
 const String coursesPage  =  'courses';
 const String profilePage  = 'profilePage';
 const String coursesContent  = 'coursesContent';
+const String videosPage  = 'videos';
 
 // Control our page route flow
 Route<dynamic> controller(RouteSettings settings) {
@@ -29,6 +33,8 @@ Route<dynamic> controller(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const HomePage());
     case taskPage:
       return MaterialPageRoute(builder: (context) => const TaskPage());
+      case taskGeneralPage:
+      return MaterialPageRoute(builder: (context) => const TaskGeneralPage());
     case registerPage:
       return MaterialPageRoute(builder: (context) => const RegisterPage());
       case contentPage:
@@ -39,6 +45,10 @@ Route<dynamic> controller(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const ProfilePage());
       case coursesContent:
       return MaterialPageRoute(builder: (context) => const CoursesContent());
+      case videosPage:
+      return MaterialPageRoute(builder: (context) =>  const VideosPage());
+
+      
 
     default:
       throw('This route name does not exit');

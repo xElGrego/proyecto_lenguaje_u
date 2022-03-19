@@ -9,12 +9,16 @@ import 'package:proyecto_lenguaje_u/src/data/model/user.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/auth_provider.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/botton_navigation_provider.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/register_controller.dart';
+import 'package:proyecto_lenguaje_u/src/data/provider/upload_file_provider.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/user_provider.dart';
 
 import 'src/data/provider/login_controller.dart';
 import 'src/config/routes.dart' as route;
 
-void main() => runApp(const MyApp());
+void main() {
+    WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -28,7 +32,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => RegisterController()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
-         ChangeNotifierProvider(create: (_) => BottonNavigationProvider()),
+        ChangeNotifierProvider(create: (_) => BottonNavigationProvider()),
+        ChangeNotifierProvider(create: (_) => UploadFileController()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

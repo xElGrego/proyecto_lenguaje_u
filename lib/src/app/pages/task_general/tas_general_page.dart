@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/task_widget.dart';
 
-class TaskPage extends StatelessWidget {
-  const TaskPage({Key? key}) : super(key: key);
+class TaskGeneralPage extends StatelessWidget {
+  const TaskGeneralPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Tareas"),
+          title: const Text("Tareas Globales"),
           backgroundColor: const Color(0xFF8e96e1),
           elevation: 0,
+          automaticallyImplyLeading: false,
           
         ),
         body: Padding(
@@ -29,7 +30,21 @@ class TaskPage extends StatelessWidget {
                 fecha: '03/02/2021',
               ),
               SizedBox(height: 15,),
- 
+              TaskWidget(
+                note: 6,
+                title: 'Actividad 2',
+                color: Color(0xffFFA800),
+                fecha: '01/02/2020',
+
+              ),
+              SizedBox(height: 15,),
+              TaskWidget(
+                note: 3,
+                title: 'Actividad 3',
+                color: Colors.red,
+                fecha: '05/02/2021',
+
+              ),
             ],
           ),
         ),

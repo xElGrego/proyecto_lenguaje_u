@@ -7,8 +7,19 @@ class CoursesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridDashboard(),
+    return  SafeArea(
+      child:  Scaffold(
+        appBar: AppBar(
+        title: const Text("Contenido"),
+        backgroundColor: const Color(0xFF8e96e1),
+        ),
+        body:Column(
+          children: [
+            const SizedBox(height: 20),
+            GridDashboard()
+          ],
+        ),
+      ),
     );
   }
 }

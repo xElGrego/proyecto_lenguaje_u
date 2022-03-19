@@ -1,10 +1,14 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../config/shared_preferences.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/user_provider.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -40,7 +44,14 @@ class ProfilePage extends StatelessWidget {
     final heigth = MediaQuery.of(context).size.height;
     User user = Provider.of<UserProvider>(context).user;
 
+    String token = user.token!;
+  
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+    
+
+
     log("$heigth");
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -55,18 +66,13 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    textfield(
-                      hintText: "Correo: ${user.correo}",
-                    ),
-                    textfield(
-                      hintText: "Nombre: Juan Pablo",
-                    ),
-                    textfield(
-                      hintText: "Apellidos: Galarza",
-                    ),
+                    textfield(hintText: "Correo: ${user.correo}"),
+                    textfield(hintText: "Nombre: ${decodedToken["fullname"]}"),
+                      textfield(hintText: "Curso: 8vo Literatura"),
+                    /* textfield(hintText: "Apellidos: Galarza"), */
                   ],
                 ),
-              )
+              ),
             ],
           ),
           CustomPaint(
@@ -75,6 +81,21 @@ class ProfilePage extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
             ),
             painter: HeaderCurvedContainer(),
+          ),
+          Positioned(
+            top: 10,
+            left: 0,
+            child: IconButton(
+              onPressed: () {
+                UserPreferences().removeUser();
+                Navigator.pushReplacementNamed(context, 'login');
+              },
+              icon: const Icon(
+                Icons.logout,
+                size: 40,
+                color: Colors.white,
+              ),
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,

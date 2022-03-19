@@ -1,6 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../data/provider/register_controller.dart';
+
 import '../../widgets/background.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -8,7 +9,6 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<RegisterController>(context);
     Size size = MediaQuery.of(context).size;
 
     return SafeArea(
@@ -107,7 +107,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.all(0),
                     child: const Text(
-                      "Ingresar",
+                      "Crear cuenta",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -115,20 +115,24 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               Container(
-                alignment: Alignment.centerRight,
-                margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                child: GestureDetector(
-                  onTap: () => {Navigator.pushNamed(context, 'login')},
-                  child: const Text(
-                    "¿Ya tienes una cuenta?",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2661FA),
+                  alignment: Alignment.centerRight,
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 10,
+                  ),
+                  child: GestureDetector(
+                    onTap: () => {
+                      Navigator.pushNamed(context, 'login')
+                    },
+                    child: const Text(
+                      "¿Ya tienes una cuenta?",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Color(0XFF2661FA),
+                      ),
                     ),
                   ),
-                ),
-              ),
+                )
             ],
           ),
         ),

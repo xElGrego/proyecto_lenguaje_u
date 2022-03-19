@@ -4,16 +4,23 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: must_be_immutable
 class GridDashboard extends StatelessWidget {
   
-  Items item4 = Items(
+  Items item1 = Items(
     title: "Contenido",
     subtitle: "Contenido del docente",
     ruta: "content",
     img: "assets/homepage/todo.png",
   );
-  Items item5 = Items(
+  Items item2 = Items(
     title: "Tareas",
     subtitle: "Revisa tus tareas",
     ruta: "task",
+    img: "assets/homepage/todo.png",
+  );
+
+  Items item3 = Items(
+    title: "Videos",
+    subtitle: "Revisa tus videos",
+    ruta: "videos",
     img: "assets/homepage/todo.png",
   );
 
@@ -22,7 +29,7 @@ class GridDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [ item5, item4];
+    List<Items> myList = [ item2, item1, item3];
     var color = 0xFF8e96e1;
     return Flexible(
       child: GridView.count(

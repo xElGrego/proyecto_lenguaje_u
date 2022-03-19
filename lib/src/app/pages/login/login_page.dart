@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,10 +58,10 @@ class LoginPage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: const Text(
-                      "Bienvenido",
+                      "Bienvenido a Edutak",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF2661FA),
+                        color: Color.fromARGB(255, 45, 97, 230),
                         fontSize: 36,
                       ),
                       textAlign: TextAlign.left,
@@ -88,14 +90,14 @@ class LoginPage extends StatelessWidget {
                     validator: (value) => value!.isEmpty ? "La contraseña es obligatoria" : null,
                   ),
                 ),
-                Container(
+               /*  Container(
                   alignment: Alignment.centerRight,
                   margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   child: const Text(
                     "¿Olvidaste la contraseña?",
                     style: TextStyle(fontSize: 12, color: Color(0XFF2661FA)),
                   ),
-                ),
+                ), */
                 SizedBox(height: size.height * 0.05),
                 Container(
                   alignment: Alignment.centerRight,
@@ -136,16 +138,18 @@ class LoginPage extends StatelessWidget {
                     vertical: 10,
                   ),
                   child: GestureDetector(
-                    onTap: () => {doLogin},
+                    onTap: () => {
+                      Navigator.pushNamed(context, 'register')
+                    },
                     child: const Text(
-                      "¿No tienes una cuenta? Créala",
+                      "¿Eres docente? Créate una cuenta",
                       style: TextStyle(
                         fontSize: 12,
                         color: Color(0XFF2661FA),
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

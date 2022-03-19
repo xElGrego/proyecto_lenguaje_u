@@ -38,6 +38,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   static Future<Map<String, dynamic>> onValue(Response response) async {
+    // ignore: prefer_typing_uninitialized_variables
     var result;
 
     final Map<String, dynamic> responseData = json.decode(response.body);
@@ -46,6 +47,7 @@ class AuthProvider extends ChangeNotifier {
     print(responseData);
 
     if (response.statusCode == 200) {
+      // ignore: unused_local_variable
       var userData = responseData['data'];
 
       User authUser = User.fromJson(responseData);
