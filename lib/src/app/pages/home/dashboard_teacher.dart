@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class GridDashboard extends StatelessWidget {
+class GrdiDashboardTeacher extends StatelessWidget {
   
   Items item1 = Items(
     title: "Contenido",
@@ -24,13 +24,19 @@ class GridDashboard extends StatelessWidget {
     img: "assets/homepage/todo.png",
   );
 
+   Items item4 = Items(
+    title: "Estudiantes",
+    subtitle: "Ver listado de estudiantes",
+    ruta: "listStudent",
+    img: "assets/homepage/todo.png",
+  );
 
 
-  GridDashboard({Key? key}) : super(key: key);
+  GrdiDashboardTeacher({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [ item2, item1, item3];
+    List<Items> myList = [ item2, item1, item3, item4];
     var color = 0xFF8e96e1;
     return Flexible(
       child: GridView.count(

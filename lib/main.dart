@@ -45,11 +45,14 @@ class MyApp extends StatelessWidget {
         home: FutureBuilder<User>(
             future: getUserData(),
             builder: (context, snapshot) {
+               
               switch (snapshot.connectionState) {
+               
                 case ConnectionState.none:
                 case ConnectionState.waiting:
                   return const Center(child: CircularProgressIndicator());
                 default:
+                
                   if (snapshot.hasError) {
                     log("hasError");
                     return Scaffold(

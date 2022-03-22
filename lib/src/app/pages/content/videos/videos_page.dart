@@ -38,10 +38,12 @@ class _VideosPageState extends State<VideosPage> {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: _ids.first,
+      
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,
-        disableDragSeek: false,
+        
+        /* disableDragSeek: false, */
         loop: false,
         isLive: false,
         forceHD: false,
@@ -121,8 +123,7 @@ class _VideosPageState extends State<VideosPage> {
           _showSnackBar('Siguiente video empezando!');
         },
       ),
-      builder: (context, player) => SafeArea(
-        child: Scaffold(
+      builder: (context, player) =>  Scaffold(
           appBar: AppBar(
              backgroundColor: const Color(0xFF8e96e1),
             title: const Text(
@@ -203,14 +204,14 @@ class _VideosPageState extends State<VideosPage> {
                       ],
                     ),
                     _space,
-                    _space,
+     
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ),
+    
     );
   }
 

@@ -59,7 +59,7 @@ class CoursesPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GroupTile(
                       name: "Lenguaje",
-                      subject: "probando",
+                      subject: "Año lectivo",
                       time: "2022",
                       function: () {
                         Navigator.pushNamed(context, 'coursesContent');

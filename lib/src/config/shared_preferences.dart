@@ -9,7 +9,7 @@ class UserPreferences {
 
     prefs.setString('correo', user.correo!);
     prefs.setString('token', user.token!);
-    prefs.setString('authorities', user.authorities![0].authority!);
+    prefs.setString('authorities', user.authorities![0]);
 
     // ignore: deprecated_member_use
     return prefs.commit();
@@ -20,8 +20,10 @@ class UserPreferences {
 
     String? email = prefs.getString("correo");
     String? token = prefs.getString("token");
+    List<String>? authorities = [];
+    authorities.add(prefs.getString("authorities")!);
 
-    return User(correo: email, token: token);
+    return User(correo: email, token: token, authorities:authorities );
   }
 
   void removeUser() async {

@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_lenguaje_u/src/data/provider/user_provider.dart';
 import '../../config/shared_preferences.dart';
 import '../model/user.dart';
 import '../services/url.dart';
@@ -29,12 +31,27 @@ class AuthProvider extends ChangeNotifier {
   @protected
   set registering(Status value) => _registering = value;
 
-  Future<Map<String, dynamic>> register(String email, String password) async {
-    final Map<String, dynamic> apiBodyData = {'email': email, 'password': password};
+  Future<Map<String, dynamic>> register(String email, String nombres, String apellidos) async {
+    final Map<String, dynamic> apiBodyData = {
+      'correo': email,
+      'password': 123456789,
+      'nombre': nombres,
+      'apellidos': apellidos,
+      'roles': ['ROLE_STUDENT'],
+    };
 
-    return await post(Uri.parse(AppUrl.register),
-        body: json.encode(apiBodyData),
-        headers: {'Content-Type': 'application/json'}).then(onValue).catchError(onError);
+
+    log("Objeto enviado a la api $apiBodyData");
+
+    return await post(
+      Uri.parse(AppUrl.register),
+      body: json.encode(apiBodyData),
+      headers: {
+        'Content-Type': 'application/json',
+        'cache-control':'no-cache',
+        'postman-token': 'b49ad29c-fb26-5847-a904-52045453ee06'
+      },
+    ).then(onValue).catchError(onError);
   }
 
   static Future<Map<String, dynamic>> onValue(Response response) async {
@@ -44,17 +61,18 @@ class AuthProvider extends ChangeNotifier {
     final Map<String, dynamic> responseData = json.decode(response.body);
 
     // ignore: avoid_print
-    print(responseData);
+    print("responseData : $responseData");
 
-    if (response.statusCode == 200) {
+    // ignore: unnecessary_null_comparison
+    if (response.statusCode == 201) {
       // ignore: unused_local_variable
-      var userData = responseData['data'];
-
-      User authUser = User.fromJson(responseData);
-
-      result = {'status': true, 'message': 'Creado con éxito', 'data': authUser};
+      log("correcto");
+      /*  var userData = responseData['data'];
+      log(userData); */
+      result = {'status': true, 'message': 'Creado con éxito'};
     } else {
-      result = {'status': false, 'message': 'Successfully registered', 'data': responseData};
+      log("inccorrecto");
+      result = {'status': false, 'message': 'Error al crear usuario'};
     }
     return result;
   }

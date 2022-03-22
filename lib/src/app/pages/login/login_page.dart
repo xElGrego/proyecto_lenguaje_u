@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
           } else {
             Flushbar(
               title: "Error",
-              message: "Error",
+              message: "Error, no se encontró al usuario",
               duration: const Duration(seconds: 2),
             ).show(context);
           }

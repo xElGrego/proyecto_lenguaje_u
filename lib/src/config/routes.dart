@@ -8,6 +8,7 @@ import 'package:proyecto_lenguaje_u/src/app/pages/task/taks_page.dart';
 
 import '../app/pages/content/videos/videos_page.dart';
 import '../app/pages/home/home_page.dart';
+import '../app/pages/list_student/list_student.dart';
 import '../app/pages/login/login_page.dart';
 import '../app/pages/task_general/tas_general_page.dart';
 
@@ -23,6 +24,7 @@ const String coursesPage  =  'courses';
 const String profilePage  = 'profilePage';
 const String coursesContent  = 'coursesContent';
 const String videosPage  = 'videos';
+const String listStudent  = 'listStudent';
 
 // Control our page route flow
 Route<dynamic> controller(RouteSettings settings) {
@@ -46,7 +48,9 @@ Route<dynamic> controller(RouteSettings settings) {
       case coursesContent:
       return MaterialPageRoute(builder: (context) => const CoursesContent());
       case videosPage:
-      return MaterialPageRoute(builder: (context) =>  const VideosPage());
+      return MaterialPageRoute(builder: (context) => const VideosPage());
+      case listStudent:
+      return MaterialPageRoute(builder: (context) => const ListStudent());
 
       
 

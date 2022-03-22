@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 class User {
   String? bearer;
   String? token;
   String? correo;
-  List<Authorities>? authorities;
+  List<String>? authorities;
+
 
   User({this.bearer, this.token, this.correo, this.authorities});
 
@@ -11,14 +14,15 @@ class User {
     token = json['token'];
     correo = json['correo'];
     if (json['authorities'] != null) {
-      authorities = <Authorities>[];
+      authorities = <String>[];
       json['authorities'].forEach((v) {
-        authorities!.add(Authorities.fromJson(v));
+        log("v $v['authority']");
+        authorities!.add(v["authority"]);
       });
     }
   }
 
-  Map<String, dynamic> toJson() {
+ /*  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['bearer'] = bearer;
     data['token'] = token;
@@ -27,10 +31,10 @@ class User {
       data['authorities'] = authorities!.map((v) => v.toJson()).toList();
     }
     return data;
-  }
+  } */
 }
 
-class Authorities {
+/* class Authorities {
   String? authority;
 
   Authorities({this.authority});
@@ -44,4 +48,4 @@ class Authorities {
     data['authority'] = authority;
     return data;
   }
-}
+} */

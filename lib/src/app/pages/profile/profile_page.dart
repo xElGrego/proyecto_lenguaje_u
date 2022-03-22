@@ -50,7 +50,12 @@ class ProfilePage extends StatelessWidget {
     
 
 
-    log("$heigth");
+    /* log("$heigth"); */
+    /* log("Authorities: ${user.authorities![0]}"); */
+   /*  log(user.authorities![0]); */
+
+    // ignore: avoid_print
+    print(user.authorities![0]);
 
     return Scaffold(
       body: Stack(
@@ -68,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     textfield(hintText: "Correo: ${user.correo}"),
                     textfield(hintText: "Nombre: ${decodedToken["fullname"]}"),
-                      textfield(hintText: "Curso: 8vo Literatura"),
+                    user.authorities![0] == 'ROLE_STUDENT' ?  textfield(hintText: "Rol: Estudiante") :  textfield(hintText: "Rol: Docente") 
                     /* textfield(hintText: "Apellidos: Galarza"), */
                   ],
                 ),
