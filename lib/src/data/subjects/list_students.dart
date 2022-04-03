@@ -1,16 +1,13 @@
-class LibroIncierto {
+class ListaEstudiantes {
   final String name;
+  final String lastName;
   final String course;
 
-  LibroIncierto({
+  ListaEstudiantes({
     required this.name,
     required this.course,
+    required this.lastName,
   });
 }
 
-List<LibroIncierto> listStudents = [
-  LibroIncierto(name: 'Juan Pablo', course: 'Octavo A1'),
-  LibroIncierto(name: 'Christian Vera', course: 'Octavo A1'),
-  LibroIncierto(name: 'Erick Aguilar', course: 'Octavo A1'),
 
-];

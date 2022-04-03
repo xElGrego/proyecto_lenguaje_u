@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../data/provider/list_studen.dart';
 import '../../../data/subjects/list_students.dart';
 import '../../widgets/add_student.dart';
 
@@ -10,6 +12,10 @@ class ListStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    final controller = Provider.of<ListStudentController>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -45,11 +51,11 @@ class ListStudent extends StatelessWidget {
         ),
         body: ListView.separated(
           separatorBuilder: (context, index) => const Divider(),
-          itemCount: listStudents.length,
+          itemCount: controller.listStudents.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               /* trailing: const Icon(Icons.arrow_forward_ios), */
-              title: Text(listStudents[index].name),
+              title: Text(controller.listStudents[index].name + "  "+controller.listStudents[index].lastName) ,
               leading: const Icon(Icons.photo_camera_front_outlined),
               onTap: () {
                 /*  Navigator.push(

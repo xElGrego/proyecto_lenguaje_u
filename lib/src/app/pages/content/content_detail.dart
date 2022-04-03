@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,9 +60,9 @@ class DetailPage extends StatelessWidget {
                             : const SizedBox(height: 1),
                         controlador.file != null
                             ? Padding(
-                              padding: const EdgeInsets.symmetric(horizontal:68.0),
-                              child: Text("${controlador.file.name}"),
-                            )
+                                padding: const EdgeInsets.symmetric(horizontal: 68.0),
+                                child: Text("${controlador.file.name}"),
+                              )
                             : const Text(""),
                         controlador.showButton == true
                             ? Padding(
@@ -69,6 +71,12 @@ class DetailPage extends StatelessWidget {
                                   onPressed: () async {
                                     log("subiendo archivo");
                                     controlador.sendPdf();
+
+                                    Flushbar(
+                                      title: "Docente",
+                                      message: "Archivo enviado correctamente.",
+                                      duration: const Duration(seconds: 2),
+                                    ).show(context);
                                   },
                                   child: const Text("Enviar archivo"),
                                 ),

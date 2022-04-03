@@ -41,6 +41,8 @@ class UploadFileController extends ChangeNotifier {
     log("Enviando pdf y reseteando los valores");
     file = null;
     _showButton = false;
+
+    
     notifyListeners();
   }
 
