@@ -38,7 +38,7 @@ Route<dynamic> controller(RouteSettings settings) {
       case taskGeneralPage:
       return MaterialPageRoute(builder: (context) => const TaskGeneralPage());
     case registerPage:
-      return MaterialPageRoute(builder: (context) => const RegisterPage());
+      return MaterialPageRoute(builder: (context) =>  RegisterPage());
       case contentPage:
       return MaterialPageRoute(builder: (context) => const ContentPage());
        case coursesPage:

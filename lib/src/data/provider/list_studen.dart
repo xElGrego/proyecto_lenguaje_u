@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 
@@ -25,15 +24,15 @@ class ListStudentController extends ChangeNotifier {
     ),
   ];
 
-  addStudent(String nombre, String apellidos) {
+  /* addStudent(String nombre, String apellidos) {
     log("dato 1 $nombre");
     log("dato 2 $apellidos");
     
     listStudents.add(ListaEstudiantes(name: nombre, course: 'Ocatvo A', lastName: apellidos));
 
-    // ignore: avoid_print
-    print(listStudents);
+    log("$listStudents");
     log("Lista agregada ");
-    /* notifyListeners(); */
-  }
+  } */
+
+
 }

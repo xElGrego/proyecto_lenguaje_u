@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:proyecto_lenguaje_u/src/data/model/list_class.dart';
+import 'package:proyecto_lenguaje_u/src/data/provider/listClass_provider.dart';
 
 import '../../widgets/grup_tile.dart';
 
@@ -54,7 +56,16 @@ class CoursesPage extends StatelessWidget {
                   ),
                 ),
                 padding: const EdgeInsets.all(20),
-                child: ListView.builder(
+                child: FutureBuilder(
+                  future: getListClass(),
+                  builder: (context, snapshot) => snapshot.hasData
+                      ? GroupTile(listaClases: snapshot.data as ListaClases)
+                      : Center(
+                          child: Image.asset('assets/ripple.gif'),
+                        ),
+                ),
+
+                /* child: ListView.builder(
                   itemCount: 1,
                   itemBuilder: (context, index) {
                     return GroupTile(
@@ -66,7 +77,7 @@ class CoursesPage extends StatelessWidget {
                       },
                     );
                   },
-                ),
+                ), */
               ),
             ),
           ],

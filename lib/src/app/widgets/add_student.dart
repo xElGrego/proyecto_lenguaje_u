@@ -25,19 +25,19 @@ class AddStudent extends StatelessWidget {
       if (form!.validate()) {
         form.save();
 
-        final Future<Map<String, dynamic>> respose = controller.register(correo, nombre, apellidos);
+        final Future<Map<String, dynamic>> respose =
+            controller.registerStudent(correo, nombre, apellidos);
 
         respose.then((response) {
           // ignore: avoid_print
           print("response login $response");
-        
+
           if (response["status"]) {
             Flushbar(
               title: "Éxito",
               message: "Guardado exitosamente.",
               duration: const Duration(seconds: 2),
             ).show(context);
-     
           } else {
             Flushbar(
               title: "Error",
@@ -109,13 +109,12 @@ class AddStudent extends StatelessWidget {
                   ),
                 ),
               ),
-              
-              const SizedBox(height: 15,),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                   ElevatedButton(
+                  ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       animationDuration: const Duration(seconds: 1),
                       elevation: 0,
@@ -127,20 +126,15 @@ class AddStudent extends StatelessWidget {
                     child: const Text("Cancelar "),
                   ),
                   ElevatedButton(
-                    onPressed:doRegister
-                      
-                      
-
-                      ,
+                    onPressed: doRegister,
                     child: const Text("Aceptar "),
                     style: ElevatedButton.styleFrom(
                       primary: const Color(0xFF8e96e1),
                       animationDuration: const Duration(seconds: 1),
                     ),
                   ),
-                 
                 ],
-              )
+              ),
             ],
           ),
         ),

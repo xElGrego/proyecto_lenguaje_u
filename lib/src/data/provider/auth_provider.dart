@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:provider/provider.dart';
-import 'package:proyecto_lenguaje_u/src/data/provider/user_provider.dart';
 import '../../config/shared_preferences.dart';
 import '../model/user.dart';
 import '../services/url.dart';
@@ -31,17 +29,17 @@ class AuthProvider extends ChangeNotifier {
   @protected
   set registering(Status value) => _registering = value;
 
-  Future<Map<String, dynamic>> register(String email, String nombres, String apellidos) async {
+  Future<Map<String, dynamic>> registerDocent(String email, String nombres, String apellidos, String password) async {
     final Map<String, dynamic> apiBodyData = {
       'correo': email,
-      'password': 123456789,
+      'password':password,
       'nombre': nombres,
       'apellidos': apellidos,
-      'roles': ['ROLE_STUDENT'],
+      'roles': ['ROLE_ADMIN'],
     };
 
 
-    log("Objeto enviado a la api $apiBodyData");
+    log("Objeto enviado a la api para el registro $apiBodyData");
 
     return await post(
       Uri.parse(AppUrl.register),
@@ -53,6 +51,30 @@ class AuthProvider extends ChangeNotifier {
       },
     ).then(onValue).catchError(onError);
   }
+
+  Future<Map<String, dynamic>> registerStudent(String email, String nombres, String apellidos) async {
+    final Map<String, dynamic> apiBodyData = {
+      'correo': email,
+      'password':'12345678',
+      'nombre': nombres,
+      'apellidos': apellidos,
+      'roles': ['ROLE_STUDENT'],
+    };
+
+
+    log("Objeto enviado a la api para el registro $apiBodyData");
+
+    return await post(
+      Uri.parse(AppUrl.registerStudent),
+      body: json.encode(apiBodyData),
+      headers: {
+        'Content-Type': 'application/json',
+        'cache-control':'no-cache',
+        'postman-token': 'b49ad29c-fb26-5847-a904-52045453ee06'
+      },
+    ).then(onValue).catchError(onError);
+  }
+
 
   static Future<Map<String, dynamic>> onValue(Response response) async {
     // ignore: prefer_typing_uninitialized_variables
@@ -91,10 +113,9 @@ class AuthProvider extends ChangeNotifier {
       Uri.parse(AppUrl.login),
       body: json.encode(loginData),
       headers: {
-        'Content-Type': 'application/json',
-        /*  'Authorization': 'Basic ZGlzYXBpdXNlcjpkaXMjMTIz', */
         'cache-control': 'no-cache',
-        'postman-token': '6e59e86a-e02e-cfcd-c8d2-aa294faa884e'
+        'Content-Type': 'application/json',
+        'postman-token': 'b49ad29c-fb26-5847-a904-52045453ee06'
       },
     );
 

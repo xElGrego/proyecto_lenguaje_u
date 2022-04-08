@@ -2,6 +2,7 @@
     package="com.example.proyecto_lenguaje_u">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
+        android:usesCleartextTraffic="true"
         android:label="proyecto_lenguaje_u"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

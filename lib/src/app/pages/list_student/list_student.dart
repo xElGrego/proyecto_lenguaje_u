@@ -22,15 +22,6 @@ class ListStudent extends StatelessWidget {
           title: const Text("Lista de estudiantes"),
           backgroundColor: const Color(0xFF8e96e1),
           actions: [
-            /* IconButton(
-              icon: const Icon(Icons.person_add_alt),
-              onPressed: () {
-                const CupertinoAlertDialog(
-                  content: AddStudent(),
-                  title: Text("Añadir estudiante"),
-                );
-              },
-            ), */
             IconButton(
               icon: const Icon(Icons.person_add_alt),
               onPressed: () {
@@ -40,8 +31,6 @@ class ListStudent extends StatelessWidget {
                     return AlertDialog(
                       title: const Text('Añadir Estudiante'),
                       content:  AddStudent(),
-                 
-      
                     );
                   },
                 );

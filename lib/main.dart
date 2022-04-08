@@ -8,6 +8,7 @@ import 'package:proyecto_lenguaje_u/src/config/shared_preferences.dart';
 import 'package:proyecto_lenguaje_u/src/data/model/user.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/auth_provider.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/botton_navigation_provider.dart';
+import 'package:proyecto_lenguaje_u/src/data/provider/list_studen.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/register_controller.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/upload_file_provider.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/user_provider.dart';
@@ -16,7 +17,7 @@ import 'src/data/provider/login_controller.dart';
 import 'src/config/routes.dart' as route;
 
 void main() {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => BottonNavigationProvider()),
         ChangeNotifierProvider(create: (_) => UploadFileController()),
+        ChangeNotifierProvider(create: (_) => ListStudentController()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -43,33 +45,33 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: FutureBuilder<User>(
-            future: getUserData(),
-            builder: (context, snapshot) {
-               
-              switch (snapshot.connectionState) {
-               
-                case ConnectionState.none:
-                case ConnectionState.waiting:
-                  return const Center(child: CircularProgressIndicator());
-                default:
-                
-                  if (snapshot.hasError) {
-                    log("hasError");
-                    return Scaffold(
+          future: getUserData(),
+          builder: (context, snapshot) {
+            log("snapshot ${snapshot.data}");
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return const Center(child: CircularProgressIndicator());
+              default:
+                if (snapshot.hasError) {
+                  log("hasError");
+                  return LoginPage();
+                  /* return Scaffold(
                       body: Center(
                         child: Text('Error: ${snapshot.error}'),
                       ),
-                    );
-                  } else if (snapshot.data?.correo == null) {
-                    log("No token");
-                    return LoginPage();
-                  } else {
-                    log("DashBoard");
-                    Provider.of<UserProvider>(context).setUser(snapshot.data!);
-                    return const HomePage();
-                  }
-              }
-            }),
+                    ); */
+                } else if (snapshot.data?.token == null) {
+                  log("No token");
+                  return LoginPage();
+                } else {
+                  log("DashBoard");
+                  Provider.of<UserProvider>(context).setUser(snapshot.data!);
+                  return const HomePage();
+                }
+            }
+          },
+        ),
       ),
     );
   }

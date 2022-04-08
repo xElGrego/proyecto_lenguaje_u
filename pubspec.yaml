@@ -44,6 +44,7 @@ dependencies:
   file_picker: ^4.5.1
   open_file: ^3.2.1
   youtube_player_flutter: ^8.0.0
+  pdfx: ^2.0.1+2
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,8 @@ flutter:
     - assets/images/
     - assets/homepage/
     - assets/libro_incierto/
+    - assets/
+    - assets/pdfs/documento_1.pdf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
