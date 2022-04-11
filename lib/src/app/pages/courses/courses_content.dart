@@ -22,7 +22,7 @@ class CoursesContent extends StatelessWidget {
 
     User user = Provider.of<UserProvider>(context).user;
     log("Rol de CoursesContent:  ${user.authorities![0]}");
-    log("argumentos recibidos ${args}" );
+    log("argumentos recibidos $args" );
     return  SafeArea(
       child:  Scaffold(
         appBar: AppBar(

@@ -23,7 +23,7 @@ class TaskGeneralPage extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(top: 15),
             children: const [
-              TaskWidget(
+             /*  TaskWidget(
                 note: 10,
                 title: 'Actividad 1',
                 color: Color.fromARGB(255, 19, 133, 42),
@@ -44,7 +44,7 @@ class TaskGeneralPage extends StatelessWidget {
                 color: Colors.red,
                 fecha: '05/02/2021',
 
-              ),
+              ), */
             ],
           ),
         ),

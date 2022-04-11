@@ -2,24 +2,24 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:proyecto_lenguaje_u/src/data/model/list_task.dart';
 
 class TaskWidget extends StatelessWidget {
-  final int note;
-  final String title;
-  final Color color;
-  final String fecha;
+ 
+  final ListTask listTask;
 
-  const TaskWidget(
-      {Key? key, required this.note, required this.title, required this.color, required this.fecha})
-      : super(key: key);
+  const TaskWidget({Key? key, required this.listTask}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    log("List task $listTask");
+
     return Container(
       padding: const EdgeInsets.only(top: 25.0, left: 20.0, right: 20.0),
-      margin: const EdgeInsets.only(right: 10.0),
+      margin: const EdgeInsets.only(right: 10.0,top: 20),
       height: 170,
-      width: 270,
+      width: 320,
       decoration: BoxDecoration(
         color: const Color(0xFF8e96e1),
         borderRadius: BorderRadius.circular(20.0),
@@ -49,26 +49,20 @@ class TaskWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 15),
-          Text(
-            'Puntaje: $note',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-            ),
-          ),
+  
           const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                title,
+                listTask.nombre,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                 ),
               ),
               Text(
-                'fecha: $fecha',
+                '',
                 style: GoogleFonts.openSans(
                   textStyle: const TextStyle(
                     color: Colors.white,
@@ -80,7 +74,7 @@ class TaskWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Stack(
+         /*  Stack(
             children: [
               Container(
                 height: 6.0,
@@ -95,16 +89,9 @@ class TaskWidget extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ), */
         ],
       ),
     );
   }
 }
-
-
-/* Text((managerStatus == "pending")
-    ? "Requested"
-        : (adminStatus == "confirm")
-    ? "Amount credited"
-        : "Admin Pending") */

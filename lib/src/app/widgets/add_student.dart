@@ -27,10 +27,8 @@ class AddStudent extends StatelessWidget {
 
         final Future<Map<String, dynamic>> respose =
             controller.registerStudent(correo, nombre, apellidos);
-
         respose.then((response) {
-          // ignore: avoid_print
-          print("response login $response");
+          log("response login $response");
 
           if (response["status"]) {
             Flushbar(

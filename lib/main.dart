@@ -56,11 +56,6 @@ class MyApp extends StatelessWidget {
                 if (snapshot.hasError) {
                   log("hasError");
                   return LoginPage();
-                  /* return Scaffold(
-                      body: Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      ),
-                    ); */
                 } else if (snapshot.data?.token == null) {
                   log("No token");
                   return LoginPage();

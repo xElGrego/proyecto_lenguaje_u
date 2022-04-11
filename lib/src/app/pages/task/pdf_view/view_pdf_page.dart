@@ -13,9 +13,12 @@ class PdfViewerPage extends StatefulWidget {
 }
 
 class _PdfViewerPageState extends State<PdfViewerPage> {
-  final pdfController = PdfController(
-    document: PdfDocument.openAsset('assets/pdfs/documento_1.pdf'),
-  );
+  /* final pdfController = PdfController(
+    document: PdfDocument.openFile('assets/pdfs/documento_1.pdf'),
+    
+  ); */
+
+  final pdfController = PdfController(document: PdfDocument.openFile('https://cpjuanvazquez.educarex.es/pueris3a5/Alafamilia/Family/Cuadricula.pdf'));
 
 
   @override
