@@ -63,28 +63,38 @@ class CoursesPage extends StatelessWidget {
                 child: FutureBuilder(
                   future: getListClass(user.token!),
                   builder: (context, snapshot) => snapshot.hasData
-                      ? GroupTile(listaClases: snapshot.data as ListaClases)
-                      : Center(
-                          child: Image.asset('assets/ripple.gif'),
-                        ),
+                      ? ListClasesito(listTask: snapshot.data as List<ListaClases>)
+                      : Center(child: Image.asset('assets/ripple.gif')),
                 ),
-
-                /* child: ListView.builder(
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return GroupTile(
-                      name: "Lenguaje",
-                      subject: "Año lectivo",
-                      time: "2022",
-                      function: () {
-                        Navigator.pushNamed(context, 'coursesContent');
-                      },
-                    );
-                  },
-                ), */
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class ListClasesito extends StatelessWidget {
+  const ListClasesito({
+    Key? key,
+    required this.listTask,
+  }) : super(key: key);
+
+  final List<ListaClases> listTask;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: List.generate(
+          listTask.length,
+          (index) => GroupTile(
+            listaClases: listTask[index],
+
+          ),
         ),
       ),
     );

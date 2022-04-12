@@ -9,7 +9,7 @@ class AppUrl{
 
   static const String login  = url + '/auth/login';
   static const String register = url + '/auth/nuevo';
-  static const String listaClase = url + '/app_colegio/rooms/3';
+  static const String listaClase = url + '/app_colegio/rooms/persona/1';
   static const String registerStudent = url + '/app_colegio/rooms/3/personas';
   static const String listTask = url + '/app_colegio/tareas/1';
 

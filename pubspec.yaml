@@ -46,6 +46,7 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   pdfx: ^2.0.1+2
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

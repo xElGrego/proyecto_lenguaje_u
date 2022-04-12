@@ -14,12 +14,12 @@ class GroupTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("GroupTile: ${listaClases.nombre}");
+ 
     return Column(
       children: <Widget>[
         ListTile(
           leading: const Icon(Icons.school),
-          title: Text(listaClases.nombre),
+          title: Text(listaClases.nombre!),
           trailing: FlatButton(
             child: const Text(
               'Ir al curso',
@@ -30,7 +30,6 @@ class GroupTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             onPressed: () {
-              /* Navigator.pushNamed(context, 'coursesContent', arguments:listaClases.nombre); */
               Navigator.push(
                 context,
                 MaterialPageRoute(

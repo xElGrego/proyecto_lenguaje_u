@@ -35,10 +35,10 @@ class DetailPage extends StatelessWidget {
                 backgroundColor: const Color(0x00dbf3f2).withOpacity(.4),
                 body: ListView(
                   children: <Widget>[
-                    buildImageProduct(detalleDescrubrimiento.image, Colors.black,
+                    imagen(detalleDescrubrimiento.image, Colors.black,
                         detalleDescrubrimiento.concepto),
                     const SizedBox(height: 20.0),
-                    descriptionProduct(detalleDescrubrimiento.concepto),
+                    description(detalleDescrubrimiento.concepto),
                     const SizedBox(height: 15.0),
                     Column(
                       children: [
@@ -118,7 +118,7 @@ class DetailPage extends StatelessWidget {
   }
 }
 
-Widget descriptionProduct(String description) {
+Widget description(String description) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 20.0),
     child: Column(
@@ -142,7 +142,7 @@ Widget descriptionProduct(String description) {
   );
 }
 
-Widget buildImageProduct(String imagePath, Color color, String uniqueId) {
+Widget imagen(String imagePath, Color color, String uniqueId) {
   return SizedBox(
     height: 290.0,
     width: double.infinity,

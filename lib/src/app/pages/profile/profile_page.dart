@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../config/config.dart';
 import '../../../config/shared_preferences.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/user_provider.dart';
@@ -41,21 +42,13 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final heigth = MediaQuery.of(context).size.height;
-    User user = Provider.of<UserProvider>(context).user;
-
-    String token = user.token!;
-  
-    Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
     
+    double defaultSize = SizeConfig.defaultSize;
+    final orientation = MediaQuery.of(context).orientation;
+    User user = Provider.of<UserProvider>(context).user;
+    String token = user.token!;
 
-
-    /* log("$heigth"); */
-    /* log("Authorities: ${user.authorities![0]}"); */
-   /*  log(user.authorities![0]); */
-
-    // ignore: avoid_print
-    print(user.authorities![0]);
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
 
     return Scaffold(
       body: Stack(
@@ -65,16 +58,17 @@ class ProfilePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: heigth / 2,
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
+                height: defaultSize * 32,
+                padding: EdgeInsets.only(top: defaultSize * 5.0),
+                margin:  EdgeInsets.symmetric(horizontal: defaultSize * 2.0, ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     textfield(hintText: "Correo: ${user.correo}"),
                     textfield(hintText: "Nombre: ${decodedToken["fullname"]}"),
-                    user.authorities![0] == 'ROLE_STUDENT' ?  textfield(hintText: "Rol: Estudiante") :  textfield(hintText: "Rol: Docente") 
-                    /* textfield(hintText: "Apellidos: Galarza"), */
+                    user.authorities![0] == 'ROLE_STUDENT'
+                        ? textfield(hintText: "Rol: Estudiante")
+                        : textfield(hintText: "Rol: Docente")
                   ],
                 ),
               ),
@@ -117,20 +111,22 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.all(10.0),
-                width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.width / 2,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 5),
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-                child: const Icon(
-                  Icons.person_pin,
-                  size: 100,
-                ),
-              ),
+              orientation == Orientation.portrait
+                  ? Container(
+                      padding: const EdgeInsets.all(10.0),
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: MediaQuery.of(context).size.width / 2,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 5),
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      child: Icon(
+                        Icons.person_pin,
+                        size: defaultSize * 15.4,
+                      ),
+                    )
+                  : Container()
             ],
           ),
         ],

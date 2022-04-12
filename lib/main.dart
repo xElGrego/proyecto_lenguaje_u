@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     Future<User> getUserData() => UserPreferences().getUser();
     return MultiProvider(
       providers: [

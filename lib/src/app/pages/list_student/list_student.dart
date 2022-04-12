@@ -43,18 +43,9 @@ class ListStudent extends StatelessWidget {
           itemCount: controller.listStudents.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              /* trailing: const Icon(Icons.arrow_forward_ios), */
               title: Text(controller.listStudents[index].name + "  "+controller.listStudents[index].lastName) ,
               leading: const Icon(Icons.photo_camera_front_outlined),
               onTap: () {
-                /*  Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailPage(
-                      listStudents[index],
-                    ),
-                  ),
-                ); */
               },
             );
           },

@@ -1,44 +1,71 @@
-class ListaClases {
+/* class ListaClases {
   final int idSala;
   final String nombre;
-  /* final String descripcion; */
 
   ListaClases({
     required this.nombre,
     required this.idSala,
-   /*  required this.descripcion, */
   });
 
   factory ListaClases.fromJson(Map<String, dynamic> json) {
     return ListaClases(
       nombre: json["nombre"],
-      /* descripcion: json["descripcion"], */
       idSala: json["idSala"],
-
     );
   }
-}
+} */
 
-
-/* class ListaClases {
+class ListaClases {
   int? idSala;
   String? nombre;
-  Null? personas;
+  List<Personas>? personas;
   Materia? materia;
   Curso? curso;
 
-  ListaClases(
-      {this.idSala, this.nombre, this.personas, this.materia, this.curso});
+  ListaClases({this.idSala, this.nombre, this.personas, this.materia, this.curso});
 
   ListaClases.fromJson(Map<String, dynamic> json) {
     idSala = json['idSala'];
     nombre = json['nombre'];
-    personas = json['personas'];
-    materia =
-        json['materia'] != null ? new Materia.fromJson(json['materia']) : null;
-    curso = json['curso'] != null ? new Curso.fromJson(json['curso']) : null;
+    if (json['personas'] != null) {
+      personas = <Personas>[];
+      json['personas'].forEach((v) {
+        personas!.add(Personas.fromJson(v));
+      });
+    }
+    materia = json['materia'] != null ? Materia.fromJson(json['materia']) : null;
+    curso = json['curso'] != null ? Curso.fromJson(json['curso']) : null;
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['idSala'] = idSala;
+    data['nombre'] = nombre;
+
+    if (materia != null) {
+      data['materia'] = materia!.toJson();
+    }
+    if (curso != null) {
+      data['curso'] = curso!.toJson();
+    }
+    return data;
+  }
+}
+
+class Personas {
+  int? id;
+  String? nombre;
+  String? apellidos;
+  String? correo;
+
+  Personas({this.id, this.nombre, this.apellidos, this.correo});
+
+  Personas.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    nombre = json['nombre'];
+    apellidos = json['apellidos'];
+    correo = json['correo'];
+  }
 }
 
 class Materia {
@@ -46,9 +73,9 @@ class Materia {
   String? nombre;
   String? descripcion;
   List<Tareas>? tareas;
-  List<Null>? recursos;
+ 
 
-  Materia({this.id, this.nombre, this.descripcion, this.tareas, this.recursos});
+  Materia({this.id, this.nombre, this.descripcion, this.tareas});
 
   Materia.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -57,12 +84,22 @@ class Materia {
     if (json['tareas'] != null) {
       tareas = <Tareas>[];
       json['tareas'].forEach((v) {
-        tareas!.add(new Tareas.fromJson(v));
+        tareas!.add(Tareas.fromJson(v));
       });
     }
-   
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['nombre'] = nombre;
+    data['descripcion'] = descripcion;
+    if (tareas != null) {
+      data['tareas'] = tareas!.map((v) => v.toJson()).toList();
+    }
+
+    return data;
+  }
 }
 
 class Tareas {
@@ -71,9 +108,9 @@ class Tareas {
   String? descripcion;
   String? urlArchivoTarea;
   String? estado;
-  int? calificacion;
+  double? calificacion;
   String? fechaPublicacion;
-  Null? fechaEntrega;
+  String? fechaEntrega;
 
   Tareas(
       {this.idTarea,
@@ -96,7 +133,18 @@ class Tareas {
     fechaEntrega = json['fechaEntrega'];
   }
 
-
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['idTarea'] = idTarea;
+    data['nombre'] = nombre;
+    data['descripcion'] = descripcion;
+    data['urlArchivoTarea'] = urlArchivoTarea;
+    data['estado'] = estado;
+    data['calificacion'] = calificacion;
+    data['fechaPublicacion'] = fechaPublicacion;
+    data['fechaEntrega'] = fechaEntrega;
+    return data;
+  }
 }
 
 class Curso {
@@ -110,4 +158,10 @@ class Curso {
     nombre = json['nombre'];
   }
 
-} */
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['nombre'] = nombre;
+    return data;
+  }
+}

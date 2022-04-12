@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_lenguaje_u/src/app/pages/task/pdf_view/view_pdf_page.dart';
 import 'package:proyecto_lenguaje_u/src/data/model/list_task.dart';
 
 import '../../../data/model/user.dart';

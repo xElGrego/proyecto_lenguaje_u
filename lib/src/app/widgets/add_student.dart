@@ -3,10 +3,7 @@ import 'dart:developer';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../data/model/user.dart';
 import '../../data/provider/auth_provider.dart';
-import '../../data/provider/user_provider.dart';
 
 // ignore: must_be_immutable
 class AddStudent extends StatelessWidget {
@@ -125,7 +122,7 @@ class AddStudent extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: doRegister,
-                    child: const Text("Aceptar "),
+                    child: const Text("Aceptar"),
                     style: ElevatedButton.styleFrom(
                       primary: const Color(0xFF8e96e1),
                       animationDuration: const Duration(seconds: 1),

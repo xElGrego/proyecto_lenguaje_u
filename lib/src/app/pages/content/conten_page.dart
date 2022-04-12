@@ -1,12 +1,9 @@
-import 'dart:developer';
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:open_file/open_file.dart';
-import 'package:provider/provider.dart';
+import 'package:proyecto_lenguaje_u/src/app/pages/content/listViewUnit.dart';
+import '../../../config/config.dart';
 
-import '../../../data/provider/upload_file_provider.dart';
 import '../../../data/subjects/libro_incierto.dart';
+import '../../../data/subjects/list_unidades.dart';
 import 'content_detail.dart';
 
 class ContentPage extends StatelessWidget {
@@ -17,14 +14,26 @@ class ContentPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Lista de temas"),
+          title: const Text("Unidades"),
           backgroundColor: const Color(0xFF8e96e1),
         ),
         body: ListView.builder(
-          itemCount: libroInciertoList.length,
+          itemCount: unidadesList.length,
           itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              trailing: const Icon(Icons.arrow_forward_ios),
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  ListViewUnit(unidades: unidadesList[index],)
+                  ),
+                );
+              },
+              child: unidadWidget(
+                unidadesList[index].title,
+              ),
+            );
+            /* return ListTile(
               title: Text(libroInciertoList[index].title),
               onTap: () {
                
@@ -37,8 +46,43 @@ class ContentPage extends StatelessWidget {
                   ),
                 );
               },
-            );
+            ); */
           },
+        ),
+      ),
+    );
+  }
+
+  Padding unidadWidget(String title) {
+    double defaultSize = SizeConfig.defaultSize;
+
+    return Padding(
+      padding: EdgeInsets.all(defaultSize * 2),
+      child: SizedBox(
+        height: defaultSize * 9.5,
+        child: AspectRatio(
+          aspectRatio: defaultSize,
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color(0xFF8e96e1),
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: defaultSize * 2),
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: defaultSize * 1.8),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

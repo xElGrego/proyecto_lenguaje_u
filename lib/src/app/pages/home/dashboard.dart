@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../config/config.dart';
+
 // ignore: must_be_immutable
 class GridDashboard extends StatelessWidget {
-  
   Items item1 = Items(
     title: "Contenido",
     subtitle: "Contenido del docente",
@@ -24,17 +25,17 @@ class GridDashboard extends StatelessWidget {
     img: "assets/homepage/todo.png",
   );
 
-
-
   GridDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [ item2, item1, item3];
+    double defaultSize = SizeConfig.defaultSize;
+
+    List<Items> myList = [item2, item1, item3];
     var color = 0xFF8e96e1;
     return Flexible(
       child: GridView.count(
-         physics: const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         childAspectRatio: 1.0,
         padding: const EdgeInsets.only(left: 16, right: 16),
         crossAxisCount: 2,
@@ -61,14 +62,13 @@ class GridDashboard extends StatelessWidget {
                   Text(
                     data.title,
                     style: GoogleFonts.openSans(
-                      textStyle: const TextStyle(
+                      textStyle:  TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: defaultSize * 1.8,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
-                  
                   const SizedBox(height: 8),
                   Text(
                     data.subtitle,

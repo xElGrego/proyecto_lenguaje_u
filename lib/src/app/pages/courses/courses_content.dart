@@ -1,28 +1,20 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../data/model/list_class.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/user_provider.dart';
-import '../../widgets/grup_tile.dart';
 import '../home/dashboard.dart';
 import '../home/dashboard_teacher.dart';
 
 class CoursesContent extends StatelessWidget {
   const CoursesContent({Key? key, }) : super(key: key);
-
-  
-
   @override
   Widget build(BuildContext context) {
 
     final args = ModalRoute.of(context)!.settings.arguments as ListaClases;
-
     User user = Provider.of<UserProvider>(context).user;
-    log("Rol de CoursesContent:  ${user.authorities![0]}");
-    log("argumentos recibidos $args" );
+
     return  SafeArea(
       child:  Scaffold(
         appBar: AppBar(
@@ -32,7 +24,7 @@ class CoursesContent extends StatelessWidget {
         body:Column(
           children: [
             const SizedBox(height: 20),
-            user.authorities![0] == 'ROLE_STUDENT' ? GridDashboard() : GrdiDashboardTeacher() 
+            user.authorities![0] == 'ROLE_STUDENT' ? GridDashboard() : GrdiDashboardTeacher(args:args) 
           ],
         ),
       ),

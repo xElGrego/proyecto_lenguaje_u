@@ -55,7 +55,7 @@ class AuthProvider extends ChangeNotifier {
   Future<Map<String, dynamic>> registerStudent(String email, String nombres, String apellidos) async {
     final Map<String, dynamic> apiBodyData = {
       'correo': email,
-      'password':'12345678',
+      'password':'123456789',
       'nombre': nombres,
       'apellidos': apellidos,
       'roles': ['ROLE_STUDENT'],

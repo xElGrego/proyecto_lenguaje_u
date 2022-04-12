@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_lenguaje_u/src/data/provider/botton_navigation_provider.dart';
 
+import '../../../config/config.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/user_provider.dart';
 
@@ -13,8 +14,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     SizeConfig().init(context);
     final controlador = Provider.of<BottonNavigationProvider>(context);
-    User user = Provider.of<UserProvider>(context).user;
+    /* User user = Provider.of<UserProvider>(context).user; */
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),

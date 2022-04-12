@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:pdfx/pdfx.dart';
+import 'package:proyecto_lenguaje_u/src/data/model/list_task.dart';
 
 class PdfViewerPage extends StatefulWidget {
   const PdfViewerPage({Key? key}) : super(key: key);
@@ -13,32 +13,23 @@ class PdfViewerPage extends StatefulWidget {
 }
 
 class _PdfViewerPageState extends State<PdfViewerPage> {
-  /* final pdfController = PdfController(
-    document: PdfDocument.openFile('assets/pdfs/documento_1.pdf'),
-    
-  ); */
 
-  final pdfController = PdfController(document: PdfDocument.openFile('https://cpjuanvazquez.educarex.es/pueris3a5/Alafamilia/Family/Cuadricula.pdf'));
-
-
-  @override
-  void dispose() {
-    pdfController.dispose();
-    log("Dipose");
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+
+    final args = ModalRoute.of(context)!.settings.arguments as ListTask;
+
+    log("Argumentos del pdf ${args.nombre} ");
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Revisar pdfs'),
+        title: Text(args.nombre),
       ),
       body: Column(
         children: [
-          Expanded(
+           Expanded(
             child: Center(
-              child: PdfView(controller: pdfController),
+              child: Container()
             ),
             flex: 3,
           ),
@@ -56,7 +47,6 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.send),
                           onPressed: () {
-                          
                             Flushbar(
                               title: "Docente",
                               message: "Nota enviada correctamente",
