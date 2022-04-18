@@ -24,7 +24,7 @@ class CoursesContent extends StatelessWidget {
         body:Column(
           children: [
             const SizedBox(height: 20),
-            user.authorities![0] == 'ROLE_STUDENT' ? GridDashboard() : GrdiDashboardTeacher(args:args) 
+            user.authorities![0] == 'ROLE_STUDENT' ? GridDashboard(args:args) : GrdiDashboardTeacher(args:args) 
           ],
         ),
       ),

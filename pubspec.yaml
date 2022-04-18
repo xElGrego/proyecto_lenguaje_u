@@ -45,6 +45,11 @@ dependencies:
   open_file: ^3.2.1
   youtube_player_flutter: ^8.0.0
   pdfx: ^2.0.1+2
+  url_launcher: ^6.0.20
+  multipart: ^0.1.2
+  pdf: ^3.7.4
+  path_provider: ^2.0.9
+  syncfusion_flutter_pdfviewer: ^20.1.48-beta.1
 
 
 dev_dependencies:

@@ -1,35 +1,42 @@
 import 'dart:async';
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_lenguaje_u/src/data/model/list_task.dart';
+import 'package:provider/provider.dart';
 
-class PdfViewerPage extends StatefulWidget {
-  const PdfViewerPage({Key? key}) : super(key: key);
+import '../../../../data/model/user.dart';
+import '../../../../data/provider/servicesPdf.dart';
+import '../../../../data/provider/user_provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-  @override
-  _PdfViewerPageState createState() => _PdfViewerPageState();
-}
-
-class _PdfViewerPageState extends State<PdfViewerPage> {
-
+// ignore: must_be_immutable
+class PdfViewerPage extends StatelessWidget {
+  PdfViewerPage({Key? key, required this.urlArchivoTarea}) : super(key: key);
+  String? urlArchivoTarea;
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<UserProvider>(context).user;
 
-    final args = ModalRoute.of(context)!.settings.arguments as ListTask;
+    log("Url en el pdf $urlArchivoTarea");
 
-    log("Argumentos del pdf ${args.nombre} ");
     return Scaffold(
       appBar: AppBar(
-        title: Text(args.nombre),
+        title: const Text("PDF"),
       ),
       body: Column(
         children: [
-           Expanded(
+          Expanded(
             child: Center(
-              child: Container()
+              child: FutureBuilder(
+                future: verPdf(user.token!, urlArchivoTarea!),
+                builder: (context, snapshot) => snapshot.hasData
+                    ? SfPdfViewer.asset(
+                       '/data/user/0/com.example.proyecto_lenguaje_u/cache/Volumen_25.pdf',
+                      )
+                    : Center(child: Image.asset('assets/ripple.gif')),
+              ),
             ),
             flex: 3,
           ),
@@ -52,7 +59,6 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
                               message: "Nota enviada correctamente",
                               duration: const Duration(seconds: 2),
                             ).show(context);
-
                             Timer(
                               const Duration(seconds: 1),
                               () => Navigator.of(context).pop(),

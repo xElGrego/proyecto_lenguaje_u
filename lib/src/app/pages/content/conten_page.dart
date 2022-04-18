@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_lenguaje_u/src/app/pages/content/listViewUnit.dart';
 import '../../../config/config.dart';
-
-import '../../../data/subjects/libro_incierto.dart';
 import '../../../data/subjects/list_unidades.dart';
-import 'content_detail.dart';
 
 class ContentPage extends StatelessWidget {
   const ContentPage({Key? key}) : super(key: key);
@@ -25,28 +22,14 @@ class ContentPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  ListViewUnit(unidades: unidadesList[index],)
-                  ),
-                );
-              },
-              child: unidadWidget(
-                unidadesList[index].title,
-              ),
-            );
-            /* return ListTile(
-              title: Text(libroInciertoList[index].title),
-              onTap: () {
-               
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailPage(
-                      libroInciertoList[index],
+                    builder: (context) => ListViewUnit(
+                      unidades: unidadesList[index],
                     ),
                   ),
                 );
               },
-            ); */
+              child: unidadWidget(unidadesList[index].title),
+            );
           },
         ),
       ),

@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../data/model/user.dart';
 import '../../data/provider/auth_provider.dart';
+import '../../data/provider/user_provider.dart';
 
 // ignore: must_be_immutable
 class AddStudent extends StatelessWidget {
@@ -14,6 +16,9 @@ class AddStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    User user = Provider.of<UserProvider>(context).user;
+    
     final controller = Provider.of<AuthProvider>(context);
 
     void doRegister() {
@@ -23,7 +28,7 @@ class AddStudent extends StatelessWidget {
         form.save();
 
         final Future<Map<String, dynamic>> respose =
-            controller.registerStudent(correo, nombre, apellidos);
+            controller.registerStudent(correo, nombre, apellidos,user.token!);
         respose.then((response) {
           log("response login $response");
 

@@ -29,68 +29,54 @@ class AuthProvider extends ChangeNotifier {
   @protected
   set registering(Status value) => _registering = value;
 
-  Future<Map<String, dynamic>> registerDocent(String email, String nombres, String apellidos, String password) async {
+  Future<Map<String, dynamic>> registerDocent(
+      String email, String nombres, String apellidos, String password) async {
     final Map<String, dynamic> apiBodyData = {
       'correo': email,
-      'password':password,
+      'password': password,
       'nombre': nombres,
       'apellidos': apellidos,
       'roles': ['ROLE_ADMIN'],
     };
-
-
-    log("Objeto enviado a la api para el registro $apiBodyData");
 
     return await post(
       Uri.parse(AppUrl.register),
       body: json.encode(apiBodyData),
       headers: {
         'Content-Type': 'application/json',
-        'cache-control':'no-cache',
+        'cache-control': 'no-cache',
         'postman-token': 'b49ad29c-fb26-5847-a904-52045453ee06'
       },
     ).then(onValue).catchError(onError);
   }
 
-  Future<Map<String, dynamic>> registerStudent(String email, String nombres, String apellidos) async {
+  Future<Map<String, dynamic>> registerStudent(
+      String email, String nombres, String apellidos, String token) async {
     final Map<String, dynamic> apiBodyData = {
-      'correo': email,
-      'password':'123456789',
       'nombre': nombres,
       'apellidos': apellidos,
       'roles': ['ROLE_STUDENT'],
+      'password': '123456789',
+      'correo': email,
     };
-
-
-    log("Objeto enviado a la api para el registro $apiBodyData");
 
     return await post(
       Uri.parse(AppUrl.registerStudent),
       body: json.encode(apiBodyData),
       headers: {
         'Content-Type': 'application/json',
-        'cache-control':'no-cache',
-        'postman-token': 'b49ad29c-fb26-5847-a904-52045453ee06'
+        'cache-control': 'no-cache',
+        'postman-token': '6e59e86a-e02e-cfcd-c8d2-aa294faa884e',
+        'Authorization': token,
       },
     ).then(onValue).catchError(onError);
   }
 
-
   static Future<Map<String, dynamic>> onValue(Response response) async {
-    // ignore: prefer_typing_uninitialized_variables
     var result;
-
     final Map<String, dynamic> responseData = json.decode(response.body);
 
-    // ignore: avoid_print
-    print("responseData : $responseData");
-
-    // ignore: unnecessary_null_comparison
     if (response.statusCode == 201) {
-      // ignore: unused_local_variable
-      log("correcto");
-      /*  var userData = responseData['data'];
-      log(userData); */
       result = {'status': true, 'message': 'Creado con éxito'};
     } else {
       log("inccorrecto");
@@ -116,6 +102,7 @@ class AuthProvider extends ChangeNotifier {
         'cache-control': 'no-cache',
         'Content-Type': 'application/json',
         'postman-token': 'b49ad29c-fb26-5847-a904-52045453ee06'
+            ''
       },
     );
 

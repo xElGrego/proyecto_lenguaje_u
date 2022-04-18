@@ -1,20 +1,20 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_lenguaje_u/src/data/model/list_task.dart';
-
+import '../../../data/model/list_class.dart';
 import '../../../data/model/user.dart';
-import '../../../data/provider/list_task.dart';
 import '../../../data/provider/user_provider.dart';
+import '../../../funcionesGenerales/modal_tarea_2.dart';
 import '../../widgets/task_widget.dart';
 
 class TaskPage extends StatelessWidget {
   const TaskPage({Key? key}) : super(key: key);
 
+  //AQUI VAN LAS TAREAS INDIVIDUALES
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context).user;
+
+    final args = ModalRoute.of(context)!.settings.arguments as ListaClases;
 
     return SafeArea(
       child: Scaffold(
@@ -23,14 +23,30 @@ class TaskPage extends StatelessWidget {
           backgroundColor: const Color(0xFF8e96e1),
           elevation: 0,
         ),
+        floatingActionButton: user.authorities![0] == 'ROLE_ADMIN'
+            ? FloatingActionButton(
+                onPressed: () {
+                 
+                  showDialog<void>(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return ModalTarea();
+                    },
+                  );
+                },
+                backgroundColor: const Color.fromARGB(255, 118, 108, 93),
+                child: const Icon(
+                  Icons.upload_file,
+                  size: 40,
+                  color: Colors.white,
+                ),
+              )
+            : Container(),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: FutureBuilder(
-            future: getTask(user.token!),
-            builder: (context, snapshot) => snapshot.hasData
-                ? ListTaskesito(listTask: snapshot.data as List<ListTask>)
-                : Center(child: Image.asset('assets/ripple.gif')),
-          ),
+          child: args.materia!.tareas!.isEmpty ? const Text("No tiene tareas"):  ListTaskesito(listTask: args.materia!.tareas! )  ,
+
         ),
       ),
     );
@@ -43,7 +59,7 @@ class ListTaskesito extends StatelessWidget {
     required this.listTask,
   }) : super(key: key);
 
-  final List<ListTask> listTask;
+  final List<Tareas> listTask;
 
   @override
   Widget build(BuildContext context) {

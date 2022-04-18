@@ -1,9 +1,4 @@
-import 'dart:async';
-import 'dart:developer';
 import 'dart:ui';
-
-import 'package:another_flushbar/flushbar.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,48 +36,8 @@ class DetailPage extends StatelessWidget {
                     description(detalleDescrubrimiento.concepto),
                     const SizedBox(height: 15.0),
                     Column(
-                      children: [
-                        controlador.showButton == false
-                            ? Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    log("Elegiendo archivo");
-                                    FilePickerResult? result =
-                                        await FilePicker.platform.pickFiles();
-                                    if (result == null) return;
-                                    controlador.file = result.files.first;
-                                    log("nombre: ${controlador.file.name}");
-                                  },
-                                  child: const Text("Subir archivo"),
-                                ),
-                              )
-                            : const SizedBox(height: 1),
-                        controlador.file != null
-                            ? Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 68.0),
-                                child: Text("${controlador.file.name}"),
-                              )
-                            : const Text(""),
-                        controlador.showButton == true
-                            ? Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    log("subiendo archivo");
-                                    controlador.sendPdf();
-
-                                    Flushbar(
-                                      title: "Docente",
-                                      message: "Archivo enviado correctamente.",
-                                      duration: const Duration(seconds: 2),
-                                    ).show(context);
-                                  },
-                                  child: const Text("Enviar archivo"),
-                                ),
-                              )
-                            : const SizedBox(height: 1),
-                        const SizedBox(height: 25.0),
+                      children: const [
+                        
                       ],
                     ),
                   ],

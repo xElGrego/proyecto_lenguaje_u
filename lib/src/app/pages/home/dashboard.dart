@@ -2,20 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../config/config.dart';
+import '../../../data/model/list_class.dart';
+import '../content/conten_page.dart';
+import '../content/videos/videos_page.dart';
+import '../task/taks_page.dart';
 
 // ignore: must_be_immutable
 class GridDashboard extends StatelessWidget {
+  GridDashboard({Key? key, required this.args}) : super(key: key);
+  ListaClases? args;
+
   Items item1 = Items(
-    title: "Contenido",
-    subtitle: "Contenido del docente",
-    ruta: "content",
-    img: "assets/homepage/todo.png",
-  );
+      title: "Contenido",
+      subtitle: "Contenido del docente",
+      ruta: "content",
+      img: "assets/homepage/todo.png",
+      widget: const ContentPage());
   Items item2 = Items(
     title: "Tareas",
     subtitle: "Revisa tus tareas",
     ruta: "task",
     img: "assets/homepage/todo.png",
+    widget: const TaskPage(),
   );
 
   Items item3 = Items(
@@ -23,9 +31,8 @@ class GridDashboard extends StatelessWidget {
     subtitle: "Revisa tus videos",
     ruta: "videos",
     img: "assets/homepage/todo.png",
+    widget: const VideosPage(),
   );
-
-  GridDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +51,15 @@ class GridDashboard extends StatelessWidget {
         children: myList.map((data) {
           return GestureDetector(
             onTap: (() {
-              Navigator.pushNamed(context, data.ruta);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => data.widget,
+                  settings: RouteSettings(
+                    arguments: args,
+                  ),
+                ),
+              );
             }),
             child: Container(
               decoration: BoxDecoration(
@@ -62,7 +77,7 @@ class GridDashboard extends StatelessWidget {
                   Text(
                     data.title,
                     style: GoogleFonts.openSans(
-                      textStyle:  TextStyle(
+                      textStyle: TextStyle(
                         color: Colors.white,
                         fontSize: defaultSize * 1.8,
                         fontWeight: FontWeight.w600,
@@ -95,10 +110,12 @@ class Items {
   String subtitle;
   String ruta;
   String img;
+  Widget widget;
   Items({
     required this.title,
     required this.subtitle,
     required this.ruta,
     required this.img,
+    required this.widget,
   });
 }

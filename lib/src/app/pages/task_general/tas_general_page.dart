@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_lenguaje_u/src/app/pages/task/taks_page.dart';
 
+import '../../../data/model/list_class.dart';
+import '../../../data/model/user.dart';
+import '../../../data/provider/list_task.dart';
+import '../../../data/provider/user_provider.dart';
 import '../../widgets/task_widget.dart';
 
 class TaskGeneralPage extends StatelessWidget {
@@ -7,6 +13,10 @@ class TaskGeneralPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    User user = Provider.of<UserProvider>(context).user;
+
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -14,38 +24,14 @@ class TaskGeneralPage extends StatelessWidget {
           backgroundColor: const Color(0xFF8e96e1),
           elevation: 0,
           automaticallyImplyLeading: false,
-          
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: ListView(
-            
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(top: 15),
-            children: const [
-             /*  TaskWidget(
-                note: 10,
-                title: 'Actividad 1',
-                color: Color.fromARGB(255, 19, 133, 42),
-                fecha: '03/02/2021',
-              ),
-              SizedBox(height: 15,),
-              TaskWidget(
-                note: 6,
-                title: 'Actividad 2',
-                color: Color(0xffFFA800),
-                fecha: '01/02/2020',
-
-              ),
-              SizedBox(height: 15,),
-              TaskWidget(
-                note: 3,
-                title: 'Actividad 3',
-                color: Colors.red,
-                fecha: '05/02/2021',
-
-              ), */
-            ],
+          child:   FutureBuilder(
+            future: getTask(user.token!),
+            builder: (context, snapshot) => snapshot.hasData
+                ? ListTaskesito(listTask: snapshot.data as List<Tareas>)
+                : Center(child: Image.asset('assets/ripple.gif')),
           ),
         ),
       ),

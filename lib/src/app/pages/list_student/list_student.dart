@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../data/model/list_class.dart';
 import '../../../data/provider/list_studen.dart';
 import '../../../data/subjects/list_students.dart';
 import '../../widgets/add_student.dart';
@@ -12,10 +13,9 @@ class ListStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as ListaClases;
 
-
-    final controller = Provider.of<ListStudentController>(context);
-
+    log("Argumentos list studen: ${args.personas}");
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -40,10 +40,10 @@ class ListStudent extends StatelessWidget {
         ),
         body: ListView.separated(
           separatorBuilder: (context, index) => const Divider(),
-          itemCount: controller.listStudents.length,
+          itemCount: args.personas!.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              title: Text(controller.listStudents[index].name + "  "+controller.listStudents[index].lastName) ,
+              title: Text( args.personas![index].nombre! +" "+ args.personas![index].apellidos!) ,
               leading: const Icon(Icons.photo_camera_front_outlined),
               onTap: () {
               },

@@ -123,14 +123,14 @@ class Tareas {
       this.fechaEntrega});
 
   Tareas.fromJson(Map<String, dynamic> json) {
-    idTarea = json['idTarea'];
+    idTarea =json.containsKey('id_tarea') == true  ? json['id_tarea'] : json['idTarea'];
     nombre = json['nombre'];
     descripcion = json['descripcion'];
-    urlArchivoTarea = json['urlArchivoTarea'];
+    urlArchivoTarea = json.containsKey('url_archivo_tarea') == true ? json['url_archivo_tarea'] : json['urlArchivoTarea'];
     estado = json['estado'];
     calificacion = json['calificacion'];
-    fechaPublicacion = json['fechaPublicacion'];
-    fechaEntrega = json['fechaEntrega'];
+    fechaPublicacion = json.containsKey('f_p') == true ? json['f_p'] : json['fechaPublicacion'];
+    fechaEntrega = json.containsKey('f_p')  == true ? json['f_p'] : json['fechaEntrega']; 
   }
 
   Map<String, dynamic> toJson() {
