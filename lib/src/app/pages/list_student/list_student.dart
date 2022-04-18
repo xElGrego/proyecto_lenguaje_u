@@ -1,11 +1,6 @@
-import 'dart:developer';
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../data/model/list_class.dart';
-import '../../../data/provider/list_studen.dart';
-import '../../../data/subjects/list_students.dart';
 import '../../widgets/add_student.dart';
 
 class ListStudent extends StatelessWidget {
@@ -15,7 +10,6 @@ class ListStudent extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ListaClases;
 
-    log("Argumentos list studen: ${args.personas}");
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

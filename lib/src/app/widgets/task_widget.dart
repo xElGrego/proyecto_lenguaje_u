@@ -2,11 +2,15 @@
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_lenguaje_u/src/app/pages/task/pdf_view/view_pdf_page.dart';
 import 'package:proyecto_lenguaje_u/src/funcionesGenerales/modal_tarea_estudiante.dart';
 import '../../config/config.dart';
 import '../../data/model/list_class.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../data/model/user.dart';
+import '../../data/provider/user_provider.dart';
 
 class TaskWidget extends StatelessWidget {
   final Tareas listTask;
@@ -15,6 +19,8 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
+
+    User user = Provider.of<UserProvider>(context).user;
 
     return Container(
       padding: const EdgeInsets.only(top: 5, left: 20.0, right: 20.0),
@@ -94,7 +100,7 @@ class TaskWidget extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              PdfViewerPage(urlArchivoTarea: listTask.urlArchivoTarea),
+                              PdfViewerPage(urlArchivoTarea: listTask.urlArchivoTarea , idTarea: listTask.idTarea.toString()),
                         ),
                       );
                     },
@@ -104,22 +110,24 @@ class TaskWidget extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return ModalTareaEstudiante(idTarea: listTask.idTarea.toString());
-                        },
-                      );
-                    },
-                    icon: Icon(
-                      Icons.arrow_circle_right,
-                      size: defaultSize * 4.0,
-                      color: Colors.white,
-                    ),
-                  ),
+                  user.authorities![0] == 'ROLE_STUDENT'
+                      ? IconButton(
+                          onPressed: () {
+                            showDialog<void>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return ModalTareaEstudiante(idTarea: listTask.idTarea.toString());
+                              },
+                            );
+                          },
+                          icon: Icon(
+                            Icons.arrow_circle_right,
+                            size: defaultSize * 4.0,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Container()
                 ],
               ),
             ],

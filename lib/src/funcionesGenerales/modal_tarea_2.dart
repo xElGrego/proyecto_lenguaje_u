@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,6 @@ import '../data/model/user.dart';
 import '../data/provider/upload_file_provider.dart';
 import '../data/provider/user_provider.dart';
 
-
-
 class ModalTarea extends StatelessWidget {
   String nombre = '', descripcion = '';
   final _formKey = GlobalKey<FormState>();
@@ -23,7 +22,6 @@ class ModalTarea extends StatelessWidget {
     double defaultSize = SizeConfig.defaultSize;
     User user = Provider.of<UserProvider>(context).user;
 
-    
     final controlador = Provider.of<UploadFileController>(context);
 
     @override
@@ -31,27 +29,33 @@ class ModalTarea extends StatelessWidget {
       final form = _formKey.currentState;
       if (form!.validate()) {
         form.save();
-       final Future<Map<String, dynamic>> respose = controlador.enviarTarea(controlador.file, nombre, descripcion,user.token!);
-    
-         respose.then((response) {
+        final Future<Map<String, dynamic>> respose =
+            controlador.enviarTarea(controlador.file, nombre, descripcion, user.token!);
+
+        respose.then((response) {
           if (response["status"]) {
-           Flushbar(
+            Flushbar(
               title: "",
               message: "La tarea se ha creado con éxito.",
               duration: const Duration(seconds: 2),
             ).show(context);
-            
           } else {
             Flushbar(
               title: "Error",
               message: "Error,la tarea no se creóo",
               duration: const Duration(seconds: 2),
             ).show(context);
-           
           }
         });
-
       }
+
+      //?Cerrar dialog
+      Timer(
+        const Duration(seconds: 3),
+        () => {
+          Navigator.of(context, rootNavigator: true).pop('dialog'),
+        },
+      );
     }
 
     return SimpleDialog(
@@ -128,9 +132,7 @@ class ModalTarea extends StatelessWidget {
                           color: Colors.teal,
                         ),
                       ),
-                      onPressed: () {
-                        enviarTareita();
-                      },
+                      onPressed: enviarTareita,
                     ),
                   ],
                 ),
@@ -142,4 +144,3 @@ class ModalTarea extends StatelessWidget {
     );
   }
 }
-

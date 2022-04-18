@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,6 @@ import 'package:proyecto_lenguaje_u/src/config/config.dart';
 import '../data/model/user.dart';
 import '../data/provider/upload_file_provider.dart';
 import '../data/provider/user_provider.dart';
-
-
 
 class ModalTareaEstudiante extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -24,7 +23,6 @@ class ModalTareaEstudiante extends StatelessWidget {
     double defaultSize = SizeConfig.defaultSize;
     User user = Provider.of<UserProvider>(context).user;
 
-    
     final controlador = Provider.of<UploadFileController>(context);
 
     @override
@@ -32,27 +30,32 @@ class ModalTareaEstudiante extends StatelessWidget {
       final form = _formKey.currentState;
       if (form!.validate()) {
         form.save();
-       final Future<Map<String, dynamic>> respose = controlador.enviarTareaEstudiante(controlador.file,user.token!,idTarea);
-    
-         respose.then((response) {
+        final Future<Map<String, dynamic>> respose =
+            controlador.enviarTareaEstudiante(controlador.file, user.token!, idTarea);
+
+        respose.then((response) {
           if (response["status"]) {
-           Flushbar(
+            Flushbar(
               title: "",
               message: "La tarea se subió al servidor con éxito.",
               duration: const Duration(seconds: 2),
             ).show(context);
-            
           } else {
             Flushbar(
               title: "Error",
               message: "Error,hubo un problema.",
               duration: const Duration(seconds: 2),
             ).show(context);
-           
           }
         });
-
       }
+       //?Cerrar dialog
+      Timer(
+        const Duration(seconds: 3),
+        () => {
+          Navigator.of(context, rootNavigator: true).pop('dialog'),
+        },
+      );
     }
 
     return SimpleDialog(
@@ -68,7 +71,7 @@ class ModalTareaEstudiante extends StatelessWidget {
             width: defaultSize * 40,
             child: Column(
               children: [
-              SizedBox(height: defaultSize * 2),
+                SizedBox(height: defaultSize * 2),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: ElevatedButton(
@@ -103,16 +106,13 @@ class ModalTareaEstudiante extends StatelessWidget {
                       },
                     ),
                     TextButton(
-                      child: const Text(
-                        "Aceptar",
-                        style: TextStyle(
-                          color: Colors.teal,
+                        child: const Text(
+                          "Aceptar",
+                          style: TextStyle(
+                            color: Colors.teal,
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        enviarTareitaStudent();
-                      },
-                    ),
+                        onPressed: enviarTareitaStudent),
                   ],
                 ),
               ],
@@ -123,4 +123,3 @@ class ModalTareaEstudiante extends StatelessWidget {
     );
   }
 }
-

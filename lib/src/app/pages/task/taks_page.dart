@@ -13,7 +13,6 @@ class TaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context).user;
-
     final args = ModalRoute.of(context)!.settings.arguments as ListaClases;
 
     return SafeArea(
@@ -26,7 +25,6 @@ class TaskPage extends StatelessWidget {
         floatingActionButton: user.authorities![0] == 'ROLE_ADMIN'
             ? FloatingActionButton(
                 onPressed: () {
-                 
                   showDialog<void>(
                     context: context,
                     barrierDismissible: false,
@@ -45,8 +43,11 @@ class TaskPage extends StatelessWidget {
             : Container(),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: args.materia!.tareas!.isEmpty ? const Text("No tiene tareas"):  ListTaskesito(listTask: args.materia!.tareas! )  ,
-
+          child: args.materia!.tareas!.isEmpty
+              ? const Center(
+                  child:  Text("No tiene tareas", style: TextStyle(fontSize: 24),),
+                )
+              : ListTaskesito(listTask: args.materia!.tareas!),
         ),
       ),
     );

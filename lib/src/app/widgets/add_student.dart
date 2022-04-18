@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_lenguaje_u/src/app/pages/list_student/list_student.dart';
 import '../../data/model/user.dart';
 import '../../data/provider/auth_provider.dart';
 import '../../data/provider/user_provider.dart';
@@ -16,9 +18,8 @@ class AddStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     User user = Provider.of<UserProvider>(context).user;
-    
+
     final controller = Provider.of<AuthProvider>(context);
 
     void doRegister() {
@@ -28,10 +29,8 @@ class AddStudent extends StatelessWidget {
         form.save();
 
         final Future<Map<String, dynamic>> respose =
-            controller.registerStudent(correo, nombre, apellidos,user.token!);
+            controller.registerStudent(correo, nombre, apellidos, user.token!);
         respose.then((response) {
-          log("response login $response");
-
           if (response["status"]) {
             Flushbar(
               title: "Éxito",
@@ -47,6 +46,14 @@ class AddStudent extends StatelessWidget {
           }
         });
       }
+
+      //?Cerrar dialog
+      Timer(
+        const Duration(seconds: 3),
+        () => {
+          Navigator.of(context, rootNavigator: true).pop('dialog'),
+        },
+      );
     }
 
     return SingleChildScrollView(

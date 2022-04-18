@@ -90,14 +90,7 @@ class LoginPage extends StatelessWidget {
                     validator: (value) => value!.isEmpty ? "La contraseña es obligatoria" : null,
                   ),
                 ),
-               /*  Container(
-                  alignment: Alignment.centerRight,
-                  margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                  child: const Text(
-                    "¿Olvidaste la contraseña?",
-                    style: TextStyle(fontSize: 12, color: Color(0XFF2661FA)),
-                  ),
-                ), */
+
                 SizedBox(height: size.height * 0.05),
                 Container(
                   alignment: Alignment.centerRight,
