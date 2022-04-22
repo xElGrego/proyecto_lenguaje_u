@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../data/model/user.dart';
-import '../../../../data/provider/sendNote.dart';
 import '../../../../data/provider/servicesPdf.dart';
+import '../../../../data/provider/upload_file_provider.dart';
 import '../../../../data/provider/user_provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
@@ -23,8 +23,7 @@ class PdfViewerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context).user;
-
-    log("Url en el pdf $urlArchivoTarea");
+      final controlador = Provider.of<UploadFileController>(context);
 
     void sendTarea() {
       final form = _formKey.currentState;
@@ -32,7 +31,7 @@ class PdfViewerPage extends StatelessWidget {
       if (form!.validate()) {
         form.save();
 
-        final Future<Map<String, dynamic>> respose = calificarTarea(user.token!, idTarea, nota);
+        final Future<Map<String, dynamic>> respose = controlador.calificarTarea(user.token!, idTarea, nota);
 
         respose.then((response) {
           if (response["status"]) {

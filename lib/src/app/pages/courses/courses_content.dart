@@ -18,7 +18,7 @@ class CoursesContent extends StatelessWidget {
     return  SafeArea(
       child:  Scaffold(
         appBar: AppBar(
-        title:  Text("Contenido: sala -> ${args.idSala}"  ),
+        title:  Text("${args.nombre}"  ),
         backgroundColor: const Color(0xFF8e96e1),
         ),
         body:Column(

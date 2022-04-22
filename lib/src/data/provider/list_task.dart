@@ -18,7 +18,7 @@ Future<List<Tareas>> getTask(String token) async {
         .toList();
     return listTask; 
   } else {
-    log("Error list task");
+   
     throw Exception('Failed to load');
   }
 }

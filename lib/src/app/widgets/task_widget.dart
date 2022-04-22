@@ -3,18 +3,21 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_lenguaje_u/src/app/pages/list_student/list_student.dart';
 import 'package:proyecto_lenguaje_u/src/app/pages/task/pdf_view/view_pdf_page.dart';
 import 'package:proyecto_lenguaje_u/src/funcionesGenerales/modal_tarea_estudiante.dart';
 import '../../config/config.dart';
 import '../../data/model/list_class.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../data/model/lista_students.dart';
 import '../../data/model/user.dart';
 import '../../data/provider/user_provider.dart';
 
 class TaskWidget extends StatelessWidget {
   final Tareas listTask;
-  const TaskWidget({Key? key, required this.listTask}) : super(key: key);
+  final ListStudents nombre;
+  const TaskWidget( {Key? key, required this.listTask, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +67,16 @@ class TaskWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  Text(
+                  nombre.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: defaultSize * 1.9,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
               Column(
@@ -99,8 +112,9 @@ class TaskWidget extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              PdfViewerPage(urlArchivoTarea: listTask.urlArchivoTarea , idTarea: listTask.idTarea.toString()),
+                          builder: (context) => PdfViewerPage(
+                              urlArchivoTarea: listTask.urlArchivoTarea,
+                              idTarea: listTask.idTarea.toString()),
                         ),
                       );
                     },

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_lenguaje_u/src/data/provider/listClass_provider.dart';
 
 import '../services/url.dart';
 
@@ -52,7 +53,8 @@ class UploadFileController extends ChangeNotifier {
     super.dispose();
   }
 
-   Future<Map<String, dynamic>>  enviarTarea(PlatformFile file, nombre, descripcion, autorizathion) async {
+  Future<Map<String, dynamic>> enviarTarea(
+      PlatformFile file, nombre, descripcion, autorizathion) async {
     Map<String, dynamic> result;
 
     Map<String, String> headers = {
@@ -82,14 +84,13 @@ class UploadFileController extends ChangeNotifier {
       result = {'status': false, 'message': 'Error'};
     }
 
-    log("Res $res");
     _showButton = false;
     notifyListeners();
     return result;
   }
 
-
-   Future<Map<String, dynamic>>  enviarTareaEstudiante(PlatformFile file, autorizathion,String idTarea) async {
+  Future<Map<String, dynamic>> enviarTareaEstudiante(
+      PlatformFile file, autorizathion, String idTarea) async {
     Map<String, dynamic> result;
 
     Map<String, String> headers = {
@@ -100,7 +101,7 @@ class UploadFileController extends ChangeNotifier {
 
     var request = http.MultipartRequest(
       'PUT',
-      Uri.parse(AppUrl.uploadTaskStuden+idTarea),
+      Uri.parse(AppUrl.uploadTaskStuden + idTarea),
     );
     request.headers.addAll(headers);
     request.files.add(
@@ -123,5 +124,33 @@ class UploadFileController extends ChangeNotifier {
     return result;
   }
 
+  Future<Map<String, dynamic>> calificarTarea(String token, String idTarea, String nota) async {
+    Map<String, dynamic> result;
 
+    Map<String, String> headers = {
+      'cache-control': 'no-cache',
+      "Content-Type": "multipart/form-data",
+      'authorization': token
+    };
+
+    var request = http.MultipartRequest(
+      'PUT',
+      Uri.parse(AppUrl.uploadTaskStuden + idTarea + '/calificar'),
+    );
+    request.headers.addAll(headers);
+
+    request.fields["cfn"] = nota;
+    var res = await request.send();
+
+    if (res.statusCode == 200) {
+      result = {'status': true, 'message': 'Successful'};
+    } else {
+      result = {'status': false, 'message': 'Error'};
+    }
+
+    getListClass(token);
+    notifyListeners();
+
+    return result;
+  }
 }

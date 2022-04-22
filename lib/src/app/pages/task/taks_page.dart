@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../data/model/list_class.dart';
+import '../../../data/model/lista_students.dart';
 import '../../../data/model/user.dart';
 import '../../../data/provider/user_provider.dart';
 import '../../../funcionesGenerales/modal_tarea_2.dart';
@@ -71,6 +72,7 @@ class ListTaskesito extends StatelessWidget {
           listTask.length,
           (index) => TaskWidget(
             listTask: listTask[index],
+            nombre: listaStudiantes[index],
           ),
         ),
       ),

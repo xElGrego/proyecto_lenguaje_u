@@ -79,7 +79,7 @@ class AuthProvider extends ChangeNotifier {
     if (response.statusCode == 201) {
       result = {'status': true, 'message': 'Creado con éxito'};
     } else {
-      log("inccorrecto");
+    
       result = {'status': false, 'message': 'Error al crear usuario'};
     }
     return result;
@@ -135,7 +135,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   static onError(error) {
-    log('the error is ${error.detail}');
+    
     return {'status': false, 'message': 'Unsuccessful Request', 'data': error};
   }
 }

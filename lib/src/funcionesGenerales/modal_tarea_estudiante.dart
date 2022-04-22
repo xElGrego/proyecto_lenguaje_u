@@ -22,7 +22,6 @@ class ModalTareaEstudiante extends StatelessWidget {
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
     User user = Provider.of<UserProvider>(context).user;
-
     final controlador = Provider.of<UploadFileController>(context);
 
     @override
@@ -49,7 +48,7 @@ class ModalTareaEstudiante extends StatelessWidget {
           }
         });
       }
-       //?Cerrar dialog
+      //?Cerrar dialog
       Timer(
         const Duration(seconds: 3),
         () => {
@@ -106,13 +105,14 @@ class ModalTareaEstudiante extends StatelessWidget {
                       },
                     ),
                     TextButton(
-                        child: const Text(
-                          "Aceptar",
-                          style: TextStyle(
-                            color: Colors.teal,
-                          ),
+                      child: const Text(
+                        "Aceptar",
+                        style: TextStyle(
+                          color: Colors.teal,
                         ),
-                        onPressed: enviarTareitaStudent),
+                      ),
+                      onPressed: enviarTareitaStudent,
+                    ),
                   ],
                 ),
               ],
